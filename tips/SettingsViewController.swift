@@ -19,22 +19,21 @@ class SettingsViewController: UIViewController {
     @IBOutlet var threeValue: UILabel!
     @IBOutlet var tipDefault: UISegmentedControl!
     
-    
-    
     let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.view.backgroundColor = UIColor(red: (204/255.0), green: (255/255.0), blue: (204/255.0), alpha: 1.0)
+        
         let option1 = defaults.integerForKey("op1")
         let option2 = defaults.integerForKey("op2")
         let option3 = defaults.integerForKey("op3")
+        
         tipDefault.selectedSegmentIndex = defaults.integerForKey("tipDefault")
 
         if(option1 != 0) {
@@ -44,7 +43,6 @@ class SettingsViewController: UIViewController {
         } else {
             sliderOne.value = 18.0
             oneValue.text = "18"
-            
         }
         
         if(option2 != 0) {
@@ -100,5 +98,4 @@ class SettingsViewController: UIViewController {
         defaults.setInteger(tipDefault.selectedSegmentIndex, forKey: "tipDefault")
         defaults.synchronize()
     }
-
 }

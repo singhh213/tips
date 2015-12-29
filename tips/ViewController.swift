@@ -19,14 +19,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         tipLabel.text = "$0.00"
         totalLabel.text = "$0.00"
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.view.backgroundColor = UIColor(red: (204/255.0), green: (255/255.0), blue: (204/255.0), alpha: 1.0)
      
         let defaults = NSUserDefaults.standardUserDefaults()
         
@@ -35,7 +35,6 @@ class ViewController: UIViewController {
         let tipValue3 = defaults.integerForKey("op3")
         tipControl.selectedSegmentIndex = defaults.integerForKey("tipDefault")
 
-        
         if (tipValue1 != 0) {
             tipControl.setTitle("\(tipValue1)%", forSegmentAtIndex: 0)
             tipPercentages[0] = Double(tipValue1) / 100.0
@@ -50,6 +49,8 @@ class ViewController: UIViewController {
             tipControl.setTitle("\(tipValue3)%", forSegmentAtIndex: 2)
             tipPercentages[2] = Double(tipValue3) / 100.0
         }
+        
+        self.billField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,13 +65,9 @@ class ViewController: UIViewController {
         
         let tip = billAmount * tipPercentage
         let total = billAmount + tip
-        
-        tipLabel.text = "$\(tip)"
-        totalLabel.text = "$\(total)"
 
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
-        
     }
 
     @IBAction func onTap(sender: AnyObject) {
